@@ -26,9 +26,7 @@ SECRET_KEY = 'django-insecure-ov_-=2z%ert8@sd_%w5s1%^v0@89)saw=rnb)4_wr1%z(ai7so
 DEBUG = False
 
 ALLOWED_HOSTS = [
-       "127.0.0.1",
-    "localhost",
-    "gadgethub-7.onrender.com",
+       "*"
 ]
 CSRF_TRUSTED_ORIGINS = [
     "https://gadgethub-7.onrender.com",
