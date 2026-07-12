@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="card shadow-lg">
+
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+
+            <div>
+                <h2 class="mb-0">
+                    <i class="bi bi-phone-fill"></i>
+                    GadgetHub
+                </h2>
+                <small>Invoice</small>
+            </div>
+
+            <button onclick="window.print()" class="btn btn-light">
+                <i class="bi bi-printer-fill"></i>
+                Print Invoice
+            </button>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row mb-4">
+
+                <div class="col-md-6">
+
+                    <h5>Customer Details</h5>
+
+                    <hr>
+
+                    <p><strong>Name:</strong> {{ order.name }}</p>
+
+                    <p><strong>Phone:</strong> {{ order.phone }}</p>
+
+                    <p><strong>Address:</strong></p>
+
+                    <p>
+                        {{ order.address }}<br>
+                        {{ order.city }} - {{ order.pincode }}
+                    </p>
+
+                </div>
+
+                <div class="col-md-6 text-md-end">
+
+                    <h5>Order Details</h5>
+
+                    <hr>
+
+                    <p><strong>Order ID:</strong> #{{ order.id }}</p>
+
+                    <p><strong>Date:</strong> {{ order.created_at|date:"d M Y" }}</p>
+
+                    <p><strong>Payment:</strong> {{ order.payment_method }}</p>
+
+                    <p>
+
+                        <strong>Payment Status:</strong>
+
+                        {% if order.payment_status %}
+
+                        <span class="badge bg-success">
+
+                            Paid
+
+                        </span>
+
+                        {% else %}
+
+                        <span class="badge bg-danger">
+
+                            Not Paid
+
+                        </span>
+
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <table class="table table-bordered">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>Description</th>
+
+                        <th class="text-center">Amount</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>Order Total</td>
+
+                        <td class="text-center">
+
+                            ₹{{ order.total_amount }}
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+            <div class="text-end mt-4">
+
+                <h3>
+
+                    Grand Total :
+
+                    <span class="text-success">
+
+                        ₹{{ order.total_amount }}
+
+                    </span>
+
+                </h3>
+
+            </div>
+
+            <hr>
+
+            <div class="text-center mt-4">
+
+                <h5 class="text-success">
+
+                    Thank You For Shopping With GadgetHub ❤️
+
+                </h5>
+
+                <p>
+
+                    We appreciate your purchase.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

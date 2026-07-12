@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">
+        <i class="bi bi-box-seam-fill text-primary"></i>
+        My Orders
+    </h2>
+
+    {% if orders %}
+
+    <div class="table-responsive">
+
+        <table class="table table-hover table-bordered align-middle shadow">
+
+            <thead class="table-dark text-center">
+
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Total Amount</th>
+                    <th>Payment Method</th>
+                    <th>Payment Status</th>
+                    <th>Order Status</th>
+                    <th>Invoice</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for order in orders %}
+
+                <tr class="text-center">
+
+                    <td>
+                        <strong>#{{ order.id }}</strong>
+                    </td>
+
+                    <td>
+                        {{ order.created_at|date:"d M Y, h:i A" }}
+                    </td>
+
+                    <td>
+                        <strong>₹{{ order.total_amount }}</strong>
+                    </td>
+
+                    <td>
+                        {{ order.payment_method }}
+                    </td>
+
+                    <td>
+
+                        {% if order.payment_status %}
+
+                        <span class="badge bg-success">
+                            Paid
+                        </span>
+
+                        {% else %}
+
+                        <span class="badge bg-danger">
+                            Not Paid
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {% if order.order_status == "Pending" %}
+
+                        <span class="badge bg-warning text-dark">
+                            ⏳ Pending
+                        </span>
+
+                        {% elif order.order_status == "Confirmed" %}
+
+                        <span class="badge bg-primary">
+                            ✔ Confirmed
+                        </span>
+
+                        {% elif order.order_status == "Packed" %}
+
+                        <span class="badge bg-info text-dark">
+                            📦 Packed
+                        </span>
+
+                        {% elif order.order_status == "Shipped" %}
+
+                        <span class="badge bg-secondary">
+                            🚚 Shipped
+                        </span>
+
+                        {% elif order.order_status == "Delivered" %}
+
+                        <span class="badge bg-success">
+                            ✅ Delivered
+                        </span>
+
+                        {% elif order.order_status == "Cancelled" %}
+
+                        <span class="badge bg-danger">
+                            ❌ Cancelled
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <!-- Invoice Button -->
+                    <td>
+
+                        <a href="{% url 'invoice' order.id %}"
+                           class="btn btn-primary btn-sm">
+
+                            <i class="bi bi-file-earmark-text"></i>
+                            View Invoice
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="alert alert-info text-center p-4">
+
+        <h4>No Orders Found</h4>
+
+        <p class="mb-3">
+            You haven't placed any orders yet.
+        </p>
+
+        <a href="{% url 'product-list' %}" class="btn btn-primary">
+
+            <i class="bi bi-bag-fill"></i>
+            Shop Now
+
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

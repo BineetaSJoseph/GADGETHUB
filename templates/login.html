@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+
+.auth-container{
+    max-width:450px;
+    margin:60px auto;
+    padding:30px;
+    background:white;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.auth-title{
+    text-align:center;
+    font-weight:bold;
+    color:#2563eb;
+    margin-bottom:25px;
+}
+
+.form-control{
+    border-radius:12px;
+    padding:12px;
+}
+
+.btn-auth{
+    width:100%;
+    background:linear-gradient(90deg,#2563eb,#7c3aed);
+    border:none;
+    padding:12px;
+    border-radius:12px;
+    color:white;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.btn-auth:hover{
+    transform:scale(1.03);
+    background:linear-gradient(90deg,#1d4ed8,#6d28d9);
+}
+
+.auth-link{
+    text-align:center;
+    margin-top:15px;
+}
+
+.auth-link a{
+    text-decoration:none;
+    color:#2563eb;
+    font-weight:bold;
+}
+
+</style>
+
+<div class="auth-container">
+
+<h2 class="auth-title">Login to GadgetHub</h2>
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-primary">
+        Login
+    </button>
+
+
+</form>
+
+
+<div class="auth-link">
+    <p>Don't have an account?
+        <a href="{% url 'signup' %}">Signup</a>
+    </p>
+</div>
+
+</div>
+
+{% endblock %}

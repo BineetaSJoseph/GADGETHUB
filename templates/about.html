@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="py-5">
+
+<div class="container">
+
+<div class="row align-items-center">
+
+<div class="col-lg-6">
+
+<h5 class="text-warning fw-bold">
+ABOUT GADGETHUB
+</h5>
+
+<h1 class="display-4 fw-bold text-primary">
+
+India's Trusted Gadget Store
+
+</h1>
+
+<p class="lead text-muted mt-4">
+
+GadgetHub is a premium online shopping platform offering the latest smartphones, laptops, smartwatches, gaming accessories, headphones and electronic gadgets from the world's leading brands.
+
+</p>
+
+<p>
+
+Our mission is to provide high-quality products with secure payments,
+fast delivery and excellent customer service.
+
+</p>
+
+<div class="mt-4">
+
+<a href="#" class="btn btn-primary btn-lg">
+
+Shop Now
+
+</a>
+
+<a href="{% url 'contact' %}" class="btn btn-outline-primary btn-lg ms-3">
+
+Contact Us
+
+</a>
+
+</div>
+
+</div>
+
+<div class="col-lg-6 text-center">
+
+<img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=900"
+
+class="img-fluid rounded-4 shadow-lg">
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="py-5 bg-light">
+
+<div class="container">
+
+<h2 class="text-center fw-bold mb-5">
+
+Why Choose GadgetHub?
+
+</h2>
+
+<div class="row g-4">
+
+<div class="col-md-3">
+
+<div class="card border-0 shadow-lg p-4 text-center h-100">
+
+<i class="bi bi-award-fill display-3 text-warning"></i>
+
+<h4 class="mt-3">
+
+Premium Quality
+
+</h4>
+
+<p>
+
+100% genuine branded products.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card border-0 shadow-lg p-4 text-center h-100">
+
+<i class="bi bi-truck display-3 text-primary"></i>
+
+<h4 class="mt-3">
+
+Fast Delivery
+
+</h4>
+
+<p>
+
+Quick delivery all over India.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card border-0 shadow-lg p-4 text-center h-100">
+
+<i class="bi bi-credit-card-fill display-3 text-success"></i>
+
+<h4 class="mt-3">
+
+Secure Payment
+
+</h4>
+
+<p>
+
+UPI, Cards, Net Banking and COD.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card border-0 shadow-lg p-4 text-center h-100">
+
+<i class="bi bi-headset display-3 text-danger"></i>
+
+<h4 class="mt-3">
+
+24/7 Support
+
+</h4>
+
+<p>
+
+Always available for customers.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

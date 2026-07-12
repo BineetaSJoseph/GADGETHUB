@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2 class="text-center mb-4">
+Checkout
+</h2>
+
+<div class="row">
+
+<div class="col-md-7">
+
+<div class="card shadow p-4">
+
+<h4>Shipping Address</h4>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<div class="mb-3">
+
+<label class="form-label">Full Name</label>
+
+<input type="text"
+name="name"
+class="form-control"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">
+Phone Number
+</label>
+
+<input type="text"
+name="phone"
+class="form-control"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">
+Address
+</label>
+
+<textarea
+name="address"
+class="form-control"
+rows="3"
+required>
+</textarea>
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">
+City
+</label>
+
+<input type="text"
+name="city"
+class="form-control"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">
+Pincode
+</label>
+
+<input type="text"
+name="pincode"
+class="form-control"
+required>
+
+</div>
+
+<button
+class="btn btn-success btn-lg w-100">
+
+Continue to Payment
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<div class="col-md-5">
+
+<div class="card shadow p-4">
+
+<h4>Order Summary</h4>
+
+<hr>
+
+{% for item in cart_items %}
+
+<div class="d-flex justify-content-between">
+
+<p>
+
+{{ item.product.name }}
+
+× {{ item.quantity }}
+
+</p>
+
+<p>
+
+₹{{ item.total_price }}
+
+</p>
+
+</div>
+
+{% endfor %}
+
+<hr>
+
+<h4>
+
+Grand Total
+
+<span class="float-end">
+
+₹{{ grand_total }}
+
+</span>
+
+</h4>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,319 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+.page-title{
+    text-align:center;
+    font-weight:700;
+    color:#2563eb;
+    margin:30px 0;
+}
+
+
+.product-card{
+    border:none;
+    border-radius:18px;
+    overflow:hidden;
+    transition:0.3s;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    background:white;
+    height:100%;
+}
+
+
+.product-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+
+.product-img{
+    height:220px;
+    object-fit:cover;
+}
+
+
+.price{
+    font-weight:bold;
+    color:#16a34a;
+    font-size:18px;
+}
+
+
+.old-price{
+    text-decoration:line-through;
+    color:gray;
+    font-size:14px;
+}
+
+
+.btn-cart{
+
+    background:linear-gradient(90deg,#2563eb,#7c3aed);
+    color:white;
+    border:none;
+    width:100%;
+    padding:10px;
+    border-radius:10px;
+    font-weight:bold;
+    transition:0.3s;
+
+}
+
+
+.btn-cart:hover{
+
+    opacity:0.9;
+    transform:scale(1.02);
+
+}
+
+
+.discount-badge{
+
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:#ef4444;
+    color:white;
+    padding:5px 10px;
+    font-size:12px;
+    border-radius:8px;
+
+}
+
+
+/* Wishlist Heart */
+
+.wishlist-btn{
+
+    position:absolute;
+    top:10px;
+    right:10px;
+    background:white;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-decoration:none;
+    box-shadow:0 3px 10px rgba(0,0,0,0.2);
+    z-index:2;
+
+}
+
+
+.wishlist-btn i{
+
+    color:red;
+    font-size:20px;
+
+}
+
+
+</style>
+
+
+
+<div class="container">
+
+
+<h2 class="page-title">
+🔥 Latest Gadgets
+</h2>
+
+
+
+<div class="row g-4">
+
+
+{% for product in products %}
+
+
+
+<div class="col-md-3">
+
+
+<div class="card product-card position-relative">
+
+
+
+<!-- Discount Badge -->
+
+{% if product.discount_price %}
+
+<span class="discount-badge">
+Offer
+</span>
+
+{% endif %}
+
+
+
+
+
+<!-- Wishlist Heart -->
+
+<a href="{% url 'add-to-wishlist' product.id %}"
+   class="wishlist-btn">
+
+    <i class="bi bi-heart-fill"></i>
+
+</a>
+
+
+
+
+
+<!-- Product Image -->
+
+<a href="{% url 'product-detail' product.id %}">
+
+<img src="{{ product.image.url }}"
+     class="card-img-top product-img"
+     alt="{{ product.name }}">
+
+</a>
+
+
+
+
+
+<div class="card-body">
+
+
+
+
+
+<!-- Product Name -->
+
+<h5 class="fw-bold">
+
+<a href="{% url 'product-detail' product.id %}"
+   class="text-dark text-decoration-none">
+
+{{ product.name }}
+
+</a>
+
+</h5>
+
+
+
+
+
+<!-- Description -->
+
+<p class="text-muted small">
+
+{{ product.description|truncatechars:60 }}
+
+</p>
+
+
+
+
+
+<!-- Price -->
+
+<p class="price">
+
+
+{% if product.discount_price %}
+
+
+₹{{ product.discount_price }}
+
+<span class="old-price">
+₹{{ product.price }}
+</span>
+
+
+{% else %}
+
+
+₹{{ product.price }}
+
+
+{% endif %}
+
+
+</p>
+
+
+
+
+
+<!-- Add To Cart -->
+
+<a href="{% url 'add-to-cart' product.id %}"
+   class="btn btn-warning w-100 mb-2">
+
+🛒 Add to Cart
+
+</a>
+
+
+
+
+
+<!-- View Details -->
+
+<a href="{% url 'product-detail' product.id %}"
+   class="btn btn-cart">
+
+View Details
+
+</a>
+
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+{% empty %}
+
+<div class="col-12">
+
+    <div class="alert alert-warning text-center">
+
+        <h4>🔍 No Products Found</h4>
+
+        <p>
+            Sorry! We couldn't find any products matching your search.
+        </p>
+
+        <a href="{% url 'product-list' %}" class="btn btn-primary">
+            View All Products
+        </a>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+{% endblock %}

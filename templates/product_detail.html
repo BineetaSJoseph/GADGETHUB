@@ -1,0 +1,441 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+.product-detail-btn{
+    border-radius:12px;
+    padding:12px 20px;
+    font-weight:600;
+}
+
+.wishlist-btn{
+
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    font-size:25px;
+}
+
+.wishlist-btn:hover{
+    transform:scale(1.1);
+}
+
+.product-image{
+    max-height:500px;
+    object-fit:contain;
+}
+
+</style>
+
+
+<div class="container mt-5">
+
+
+<div class="row align-items-center">
+
+
+<!-- Product Image -->
+
+<div class="col-md-6 text-center">
+
+
+{% if product.image %}
+
+<img src="{{ product.image.url }}"
+class="img-fluid rounded shadow product-image"
+alt="{{ product.name }}">
+
+
+{% else %}
+
+<img src="{% static 'images/no-image.png' %}"
+class="img-fluid rounded shadow product-image">
+
+
+{% endif %}
+
+
+</div>
+
+
+
+<!-- Product Details -->
+
+<div class="col-md-6">
+
+
+<h2 class="fw-bold">
+
+{{ product.name }}
+
+</h2>
+
+
+<hr>
+
+
+<h3 class="text-success">
+
+
+{% if product.discount_price %}
+
+₹{{ product.discount_price }}
+
+<span class="text-muted text-decoration-line-through fs-5">
+
+₹{{ product.price }}
+
+</span>
+
+
+{% else %}
+
+
+₹{{ product.price }}
+
+
+{% endif %}
+
+
+</h3>
+
+
+
+<p class="mt-4">
+
+{{ product.description }}
+
+</p>
+
+
+
+<h5 class="mb-4">
+
+Stock : {{ product.stock }}
+
+</h5>
+
+
+
+
+<!-- Buttons -->
+
+<div class="d-flex gap-2 align-items-center">
+
+
+<!-- Add Cart -->
+
+<a href="{% url 'add-to-cart' product.id %}"
+
+class="btn btn-warning btn-lg product-detail-btn">
+
+
+<i class="bi bi-cart-plus"></i>
+
+Add to Cart
+
+</a>
+
+
+
+
+<!-- Wishlist Heart -->
+
+<a href="{% url 'add-to-wishlist' product.id %}"
+
+class="btn btn-danger wishlist-btn">
+
+
+<i class="bi bi-heart-fill"></i>
+
+
+</a>
+
+
+
+
+<!-- Buy Now -->
+
+<a href="{% url 'buy-now' product.id %}"
+   class="btn btn-success btn-lg product-detail-btn">
+    <i class="bi bi-lightning-charge-fill"></i> Buy Now
+</a>
+
+
+<!-- Back -->
+
+<a href="{% url 'product-list' %}"
+
+class="btn btn-secondary btn-lg product-detail-btn">
+
+
+Back
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- Review Form -->
+
+<hr class="mt-5">
+
+
+<h3 class="mb-4">
+
+Write a Review
+
+</h3>
+
+
+
+
+<form method="POST"
+
+action="{% url 'add-review' product.id %}">
+
+
+{% csrf_token %}
+
+
+
+<div class="mb-3">
+
+
+<label class="form-label">
+
+Rating
+
+</label>
+
+
+
+<select name="rating"
+
+class="form-select">
+
+
+<option value="5">
+
+⭐⭐⭐⭐⭐ (5)
+
+</option>
+
+
+<option value="4">
+
+⭐⭐⭐⭐ (4)
+
+</option>
+
+
+<option value="3">
+
+⭐⭐⭐ (3)
+
+</option>
+
+
+<option value="2">
+
+⭐⭐ (2)
+
+</option>
+
+
+<option value="1">
+
+⭐ (1)
+
+</option>
+
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+<div class="mb-3">
+
+
+<label class="form-label">
+
+Comment
+
+</label>
+
+
+
+<textarea
+
+name="comment"
+
+rows="4"
+
+class="form-control"
+
+placeholder="Write your review here..."
+
+required>
+
+</textarea>
+
+
+</div>
+
+
+
+
+<button type="submit"
+
+class="btn btn-primary">
+
+
+Submit Review
+
+
+</button>
+
+
+</form>
+
+
+
+
+
+<!-- Customer Reviews -->
+
+
+<hr class="mt-5">
+
+
+<h3 class="mb-4">
+
+Customer Reviews
+
+</h3>
+
+
+
+
+{% for review in product.reviews.all %}
+
+
+
+<div class="card mb-3 shadow-sm">
+
+
+<div class="card-body">
+
+
+<h5>
+
+{{ review.user.username }}
+
+</h5>
+
+
+
+<p class="text-warning fs-5">
+
+
+{% if review.rating == 5 %}
+
+⭐⭐⭐⭐⭐
+
+
+{% elif review.rating == 4 %}
+
+⭐⭐⭐⭐
+
+
+{% elif review.rating == 3 %}
+
+⭐⭐⭐
+
+
+{% elif review.rating == 2 %}
+
+⭐⭐
+
+
+{% else %}
+
+⭐
+
+
+{% endif %}
+
+
+
+</p>
+
+
+
+
+<p>
+
+{{ review.comment }}
+
+</p>
+
+
+
+
+<small class="text-muted">
+
+{{ review.created_at }}
+
+</small>
+
+
+
+</div>
+
+
+</div>
+
+
+
+{% empty %}
+
+
+<div class="alert alert-info">
+
+
+No reviews yet.
+
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+{% endblock %}

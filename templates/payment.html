@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<div class="row justify-content-center">
+
+<div class="col-md-7">
+
+<div class="card shadow-lg p-4">
+
+<h2 class="text-center mb-4">
+Payment
+</h2>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<div class="mb-3">
+
+<label class="form-label">
+Select Payment Method
+</label>
+
+<select name="payment_method" class="form-select">
+
+<option value="COD">
+Cash On Delivery
+</option>
+
+<option value="UPI">
+UPI
+</option>
+
+<option value="CARD">
+Debit / Credit Card
+</option>
+
+<option value="NETBANKING">
+Net Banking
+</option>
+
+</select>
+
+</div>
+
+<button class="btn btn-success w-100 btn-lg">
+
+Pay Now
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

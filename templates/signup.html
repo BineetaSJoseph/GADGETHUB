@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+
+.auth-container{
+    max-width:500px;
+    margin:60px auto;
+    padding:30px;
+    background:white;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.auth-title{
+    text-align:center;
+    font-weight:bold;
+    color:#7c3aed;
+    margin-bottom:25px;
+}
+
+.form-control{
+    border-radius:12px;
+    padding:12px;
+    margin-bottom:15px;
+}
+
+.btn-auth{
+    width:100%;
+    background:linear-gradient(90deg,#7c3aed,#2563eb);
+    border:none;
+    padding:12px;
+    border-radius:12px;
+    color:white;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.btn-auth:hover{
+    transform:scale(1.03);
+}
+
+.auth-link{
+    text-align:center;
+    margin-top:15px;
+}
+
+.auth-link a{
+    text-decoration:none;
+    color:#7c3aed;
+    font-weight:bold;
+}
+
+</style>
+
+<div class="auth-container">
+
+<h2 class="auth-title">Create Account</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    {{ form.username }}
+    {{ form.email }}
+    {{ form.password1 }}
+    {{ form.password2 }}
+
+    <button type="submit" class="btn-auth">
+        Signup
+    </button>
+
+</form>
+
+<div class="auth-link">
+    <p>Already have an account?
+        <a href="{% url 'login' %}">Login</a>
+    </p>
+</div>
+
+</div>
+
+{% endblock %}
