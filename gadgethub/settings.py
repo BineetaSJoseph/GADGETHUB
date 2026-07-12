@@ -26,11 +26,13 @@ SECRET_KEY = 'django-insecure-ov_-=2z%ert8@sd_%w5s1%^v0@89)saw=rnb)4_wr1%z(ai7so
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "127.0.0.1",
+       "127.0.0.1",
     "localhost",
-    "gadgethub-2.onrender.com",
+    "gadgethub-4.onrender.com",
 ]
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://gadgethub-4.onrender.com",
+]
 
 # Application definition
 
@@ -121,7 +123,7 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = "josephbineeta89@gmail.com"
 
-EMAIL_HOST_PASSWORD = "ftja kryr tovz bkkj"
+EMAIL_HOST_PASSWORD = "baom cjlw wdwr rhly"
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
@@ -145,7 +147,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-
+STATIC_ROOT = BASE_DIR / "staticfiles"
 # MEDIA FILES (Product Images Upload)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
