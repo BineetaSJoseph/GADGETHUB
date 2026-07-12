@@ -31,7 +31,7 @@ ALLOWED_HOSTS = [
     "gadgethub-4.onrender.com",
 ]
 CSRF_TRUSTED_ORIGINS = [
-    "https://gadgethub-4.onrender.com",
+    "https://gadgethub-5.onrender.com",
 ]
 
 # Application definition
@@ -123,7 +123,7 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = "josephbineeta89@gmail.com"
 
-EMAIL_HOST_PASSWORD = "baom cjlw wdwr rhly"
+EMAIL_HOST_PASSWORD = "akog uxwx nljd dhrb"
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
