@@ -31,7 +31,7 @@ ALLOWED_HOSTS = [
     "gadgethub-6.onrender.com",
 ]
 CSRF_TRUSTED_ORIGINS = [
-    "https://gadgethub-5.onrender.com",
+    "https://gadgethub-6.onrender.com",
 ]
 
 # Application definition
