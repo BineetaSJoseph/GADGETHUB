@@ -28,10 +28,10 @@ DEBUG = False
 ALLOWED_HOSTS = [
        "127.0.0.1",
     "localhost",
-    "gadgethub-6.onrender.com",
+    "gadgethub-7.onrender.com",
 ]
 CSRF_TRUSTED_ORIGINS = [
-    "https://gadgethub-6.onrender.com",
+    "https://gadgethub-7.onrender.com",
 ]
 
 # Application definition
