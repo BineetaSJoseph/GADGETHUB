@@ -3,17 +3,16 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView, ListView, DetailView
-from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.edit import FormView
-from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
-from django.views import View
 from .forms import SignUpForm,ProfileUpdateForm
 from .models import Category, Product, Cart, CartItem, Order,Review,Wishlist
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Sum
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth import login
 
 # ==========================
 # Home Page
@@ -61,16 +60,12 @@ class UserLoginView(LoginView):
 
 
 
-class UserLogoutView(View):
-    def get(self, request):
-        logout(request)
-        return redirect("login")
+class UserLogoutView(LogoutView):
+    next_page = "login"
 
-    def post(self, request):
-        logout(request)
-        return redirect("login")
-
-
+    def dispatch(self, request, *args, **kwargs):
+        messages.success(request, "You have been logged out successfully.")
+        return super().dispatch(request, *args, **kwargs)
 # ==========================
 # Signup
 # ==========================

@@ -315,9 +315,9 @@ class="icon-btn position-relative">
 
 {% if user.is_authenticated %}
 
-<form method="post" action="{% url 'logout' %}" style="display:inline;">
+<form method="post" action="{% url 'logout' %}">
     {% csrf_token %}
-    <button type="submit" class="btn login-btn">
+    <button type="submit" class="logout-btn">
         Logout
     </button>
 </form>
