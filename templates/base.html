@@ -315,13 +315,12 @@ class="icon-btn position-relative">
 
 {% if user.is_authenticated %}
 
-<a
-href="{% url 'logout' %}"
-class="nav-link login-btn">
-
-Logout
-
-</a>
+<form method="post" action="{% url 'logout' %}" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn login-btn">
+        Logout
+    </button>
+</form>
 
 {% else %}
 
@@ -346,12 +345,21 @@ Signup
 {% if user.is_staff %}
 
 <li class="nav-item">
-    <a class="nav-link" href="{% url 'admin-dashboard' %}">
-        <i class="bi bi-speedometer2"></i>
-        Dashboard
+    <a class="nav-link" href="{% url 'profile' %}">
+        <i class="bi bi-person-circle"></i> My Profile
     </a>
 </li>
-fgsy blng trnl akgb
+
+{% if user.is_staff %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'admin-dashboard' %}">
+        <i class="bi bi-speedometer2"></i> Dashboard
+    </a>
+</li>
+{% endif %}
+
+</ul>
+
 
 {% endif %}
 </div>

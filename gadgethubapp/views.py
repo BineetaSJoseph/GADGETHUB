@@ -5,10 +5,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.edit import FormView
-from django.contrib.auth import login
+from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
+from django.views import View
 from .forms import SignUpForm,ProfileUpdateForm
 from .models import Category, Product, Cart, CartItem, Order,Review,Wishlist
 from django.contrib.admin.views.decorators import staff_member_required
@@ -58,8 +59,16 @@ class UserLoginView(LoginView):
 # Logout
 # ==========================
 
-class UserLogoutView(LogoutView):
-    next_page = "login"
+
+
+class UserLogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect("login")
+
+    def post(self, request):
+        logout(request)
+        return redirect("login")
 
 
 # ==========================
@@ -435,25 +444,7 @@ def order_success(request):
     )
 
 
-@login_required
-def profile(request):
 
-    orders = Order.objects.filter(user=request.user)
-    wishlist = Wishlist.objects.filter(user=request.user)
-    cart = Cart.objects.filter(user=request.user).first()
-
-    cart_count = 0
-
-    if cart:
-        cart_count = CartItem.objects.filter(cart=cart).count()
-
-    context = {
-        "orders_count": orders.count(),
-        "wishlist_count": wishlist.count(),
-        "cart_count": cart_count,
-    }
-
-    return render(request, "profile.html", context)
 # ==========================
 # My Profile
 # ==========================
@@ -523,22 +514,7 @@ def edit_profile(request):
 # Invoice
 # ==========================
 
-@login_required
-def invoice(request, order_id):
 
-    order = get_object_or_404(
-        Order,
-        id=order_id,
-        user=request.user
-    )
-
-    return render(
-        request,
-        "invoice.html",
-        {
-            "order": order
-        }
-    )
 @login_required
 def invoice(request, order_id):
     order = get_object_or_404(
